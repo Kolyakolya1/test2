@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+    web:
+        build: ./
+        environment:
+            - APACHE_RUN_USER=#1000
+            - COMPOSER_MEMORY_LIMIT=-1
+        volumes:
+            - ./:/var/www/html
+        ports:
+            - 8095:80                             # http://localhost:8095
+        working_dir: /var/www/html
+
+    db:
+        image: mariadb
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: test1
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        links:
+            - db:db
+        ports:
+            - 9095:80                             #  http://localhost:9095
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+        depends_on:
+            - db
