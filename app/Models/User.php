@@ -23,6 +23,8 @@ class User extends Authenticatable
         'password',
     ];
 
+    public const ADMIN = 1;
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -41,4 +43,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function isAdmin(): int
+    {
+        return $this->role === self::ADMIN;
+    }
 }
