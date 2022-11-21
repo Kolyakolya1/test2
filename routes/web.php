@@ -16,10 +16,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
     Route::get('/', [AuthController::class, 'loginForm']);
+    Route::get('/login', [AuthController::class, 'loginForm']);
     Route::post('/login', [AuthController::class, 'login'])->name('login');
+});
+
+Route::middleware(['auth', 'is_admin'])->name('admin.')->group(function () {
+    Route::resource('admin/articles', \App\Http\Controllers\Admin\ArticleController::class);
 });
 
 Route::middleware('auth')->group(function () {
     Route::get('articles', [\App\Http\Controllers\Blog\ArticleController::class, 'index'])->name('articles.index');
     Route::get('articles/{article}', [\App\Http\Controllers\Blog\ArticleController::class, 'show'])->name('articles.show');
 });
+

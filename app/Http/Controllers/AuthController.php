@@ -19,6 +19,9 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => $request->password,
         ])) {
+            if (Auth::user()->isAdmin()) {
+                return redirect()->route('admin.articles.index');
+            }
             return redirect()->route('articles.index');
         }
 

@@ -10,7 +10,7 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::getListFromRedis();
 
         return view('blog.index', compact('articles'));
     }
