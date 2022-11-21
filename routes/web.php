@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware('guest')->group(function () {
+    Route::get('/', [AuthController::class, 'loginForm']);
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
 });
