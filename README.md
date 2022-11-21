@@ -11,7 +11,7 @@
 
 Clone the repo and change your work directory to root of sources
 
-    git clone https://github.com/kolyatests/test2.git
+    git clone https://github.com/Kolyakolya1/test2.git
 
 Run first iteration of Docker environment
 
