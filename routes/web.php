@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,4 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('guest')->group(function () {
     Route::get('/', [AuthController::class, 'loginForm']);
     Route::post('/login', [AuthController::class, 'login'])->name('login');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('articles', [\App\Http\Controllers\Blog\ArticleController::class, 'index'])->name('articles.index');
+    Route::get('articles/{article}', [\App\Http\Controllers\Blog\ArticleController::class, 'show'])->name('articles.show');
 });
